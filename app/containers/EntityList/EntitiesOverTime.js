@@ -150,7 +150,7 @@ export function EntitiesOverTime({
   return (
     <ContainerWrapper headerStyle="types" ref={scrollContainer} isPrint={isPrintView}>
       {isPrintView && (
-        <HeaderPrint />
+        <HeaderPrint argsRemove={['subj', 'ac', 'tc', 'actontype']} />
       )}
       {viewOptions && viewOptions.length > 1 && !isPrintView && (
         <PrintHide>

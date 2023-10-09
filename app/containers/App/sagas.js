@@ -129,12 +129,12 @@ const autoRestart = (generator, handleError, maxTries = MAX_LOAD_ATTEMPTS) => fu
     }
   }
 };
-  /**
-   * Generator function. Load data error handler:
-   * - Record load error
-   *
-   * @param {object} payload {key: data set key}
-   */
+/**
+ * Generator function. Load data error handler:
+ * - Record load error
+ *
+ * @param {object} payload {key: data set key}
+ */
 function* loadEntitiesErrorHandler(err, { path }) {
   yield put(entitiesLoadingError(err, path));
 }
@@ -643,7 +643,7 @@ const getNextQuery = (query, extend, location) => {
         // add if not already present
         if (param.add && queryUpdated[param.arg].indexOf(param.value.toString()) === -1) {
           queryUpdated[param.arg].push(param.value);
-        // remove if present
+          // remove if present
         } else if (extend && param.remove && param.value && queryUpdated[param.arg].indexOf(param.value.toString()) > -1) {
           queryUpdated[param.arg] = without(queryUpdated[param.arg], param.value.toString());
           // convert to single value if only one value left
@@ -653,20 +653,20 @@ const getNextQuery = (query, extend, location) => {
             /* eslint-enable prefer-destructuring */
           }
         }
-      // if single value set
-      // add if not already present and convert to array
+        // if single value set
+        // add if not already present and convert to array
       } else if (param.value && param.add && queryUpdated[param.arg] !== param.value.toString()) {
         queryUpdated[param.arg] = [queryUpdated[param.arg], param.value];
-      // remove if present
+        // remove if present
       } else if (extend && param.remove && (!param.value || (param.value && queryUpdated[param.arg] === param.value.toString()))) {
         delete queryUpdated[param.arg];
       }
-    // if set and removing
+      // if set and removing
     } else if (queryUpdated[param.arg] && param.value && param.replace) {
       queryUpdated[param.arg] = param.value;
     } else if (queryUpdated[param.arg] && (param.remove || typeof param.value === 'undefined' || param.value === null)) {
       delete queryUpdated[param.arg];
-    // if not set or replacing with new value
+      // if not set or replacing with new value
     } else if (typeof param.value !== 'undefined' && !param.remove) {
       queryUpdated[param.arg] = param.value;
     }

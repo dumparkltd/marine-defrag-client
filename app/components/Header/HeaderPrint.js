@@ -65,17 +65,35 @@ const Meta = styled.div`
 
 const CLEANUP = ['mvw'];
 
-function HeaderPrint({ theme, intl }) {
+function HeaderPrint({
+  theme, intl, argsKeep, argsRemove,
+}) {
   const appTitle = `${intl.formatMessage(appMessages.app.title)} - ${intl.formatMessage(appMessages.app.claim)}`;
   const now = new Date();
   let url = window && window.location
     && `${window.location.origin}${window.location.pathname}`;
   if (url && window.location.search) {
     const params = new URLSearchParams(window.location.search);
-    CLEANUP.forEach((p) => {
+    // always remove keys in CLEANUP
+    let remove = CLEANUP;
+    // explicitly remove the keys in argsRemove
+    if (argsRemove) {
+      remove = [...remove, ...argsRemove];
+    }
+    // remove all but the keys in argsKeep
+    if (argsKeep) {
+      params.forEach((value, key) => {
+        if (argsKeep.indexOf(key) < 0) {
+          remove.push(key);
+        }
+      });
+    }
+    remove.forEach((p) => {
       params.delete(p);
     });
-    url = `${url}?${params.toString()}`;
+    if (params.size > 0) {
+      url = `${url}?${params.toString()}`;
+    }
   }
   return (
     <Styled>
@@ -114,6 +132,8 @@ function HeaderPrint({ theme, intl }) {
 HeaderPrint.propTypes = {
   intl: intlShape.isRequired,
   theme: PropTypes.object.isRequired,
+  argsKeep: PropTypes.array,
+  argsRemove: PropTypes.array,
 };
 
 export default withTheme(injectIntl(HeaderPrint));

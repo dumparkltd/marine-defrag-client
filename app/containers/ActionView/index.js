@@ -219,7 +219,9 @@ export function ActionView({
         }
         { viewEntity && dataReady && (
           <ViewWrapper isPrint={isPrintView}>
-            {isPrintView && <HeaderPrint />}
+            {isPrintView && (
+              <HeaderPrint argsKeep={['am', 'tm', 'subj', 'ac', 'tc']} />
+            )}
             <ViewHeader
               isPrintView={isPrintView}
               title={typeId

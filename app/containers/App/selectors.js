@@ -342,10 +342,6 @@ export const selectAssociationQuery = createSelector(
   selectLocationQuery,
   (locationQuery) => locationQuery && locationQuery.get('by-association')
 );
-export const selectConnectedCategoryQuery = createSelector(
-  selectLocationQuery,
-  (locationQuery) => locationQuery && locationQuery.get('catx')
-);
 export const selectResourceQuery = createSelector(
   selectLocationQuery,
   (locationQuery) => locationQuery && locationQuery.get('resources')
@@ -353,14 +349,6 @@ export const selectResourceQuery = createSelector(
 export const selectSearchQuery = createSelector(
   selectLocationQuery,
   (locationQuery) => locationQuery && locationQuery.get('search')
-);
-export const selectActortypeListQuery = createSelector(
-  selectLocationQuery,
-  (locationQuery) => locationQuery && locationQuery.get('actortypex')
-);
-export const selectActiontypeListQuery = createSelector(
-  selectLocationQuery,
-  (locationQuery) => locationQuery && locationQuery.get('actiontypex')
 );
 export const selectSortOrderQuery = createSelector(
   selectLocationQuery,
@@ -862,14 +850,6 @@ export const selectEntitiesWhereQuery = createSelector(
   (query, entities) => query
     ? filterEntitiesByAttributes(entities, query)
     : entities
-);
-export const selectEntitiesSearchQuery = createSelector(
-  selectEntitiesWhereQuery,
-  selectSearchQuery,
-  (state, { searchAttributes }) => searchAttributes,
-  (entities, query, searchAttributes) => query
-    ? filterEntitiesByKeywords(entities, query, searchAttributes)
-    : entities // !search
 );
 
 // filter entities by attributes, using object

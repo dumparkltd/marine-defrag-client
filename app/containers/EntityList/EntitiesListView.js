@@ -105,11 +105,11 @@ class EntitiesListView extends React.Component { // eslint-disable-line react/pr
       this.ScrollReference.current,
       this.ScrollContainer.current
     );
-  }
+  };
 
   setType = (type) => {
     this.setState({ viewType: type });
-  }
+  };
 
   render() {
     const {
@@ -127,6 +127,7 @@ class EntitiesListView extends React.Component { // eslint-disable-line react/pr
       headerStyle,
       viewOptions,
       hasFilters,
+      filters,
       showCode,
       entityIdsSelected,
       listUpdating,
@@ -374,7 +375,7 @@ class EntitiesListView extends React.Component { // eslint-disable-line react/pr
         isPrint={isPrintView}
       >
         {isPrintView && (
-          <HeaderPrint />
+          <HeaderPrint argsRemove={['subj', 'ac', 'tc', 'actontype']} />
         )}
         {dataReady && viewOptions && viewOptions.length > 1 && (
           <PrintHide>
@@ -392,6 +393,8 @@ class EntitiesListView extends React.Component { // eslint-disable-line react/pr
                   subTitle={headerSubTitle}
                   hasViewOptions={viewOptions && viewOptions.length > 1}
                   info={headerOptions && headerOptions.info}
+                  hasFilters={hasFilters}
+                  filters={filters}
                 />
                 {config.types === 'actiontypes' && (
                   <Box>
@@ -608,6 +611,7 @@ EntitiesListView.propTypes = {
   viewOptions: PropTypes.array,
   entityTitle: PropTypes.object, // single/plural
   headerOptions: PropTypes.object, // single/plural
+  filters: PropTypes.array,
   intl: intlShape.isRequired,
   // primitive
   headerStyle: PropTypes.string,

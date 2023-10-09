@@ -828,7 +828,7 @@ export function EntitiesMap(props) {
   return (
     <Styled headerStyle="types" noOverflow isPrint={isPrintView}>
       {isPrintView && (
-        <HeaderPrint />
+        <HeaderPrint argsRemove={['subj', 'ac', 'tc', 'actontype']} />
       )}
       {dataReady && (
         <MapControl

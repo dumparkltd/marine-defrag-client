@@ -29,6 +29,8 @@ import appMessages from 'containers/App/messages';
 import { ROUTES } from 'themes/config';
 import { PRINT_TYPES } from 'containers/App/constants';
 
+import { keydownHandlerPrint } from 'utils/print';
+
 import EntityList from 'containers/EntityList';
 
 import { CONFIG, DEPENDENCIES } from './constants';
@@ -71,6 +73,23 @@ export function ResourceList({
   useEffect(() => {
     if (!dataReady) onLoadEntitiesIfNeeded();
   }, [dataReady]);
+
+  const mySetPrintView = () => onSetPrintView({
+    printType: PRINT_TYPES.LIST,
+    printContentOptions: { pages: true },
+    printOrientation: 'portrait',
+    printSize: 'A4',
+  });
+  const keydownHandler = (e) => {
+    keydownHandlerPrint(e, mySetPrintView);
+  };
+  useEffect(() => {
+    document.addEventListener('keydown', keydownHandler);
+    return () => {
+      document.removeEventListener('keydown', keydownHandler);
+    };
+  }, []);
+
   const typeId = params.id;
   const type = `resources_${typeId}`;
   const headerOptions = {
@@ -87,13 +106,7 @@ export function ResourceList({
   if (window.print) {
     headerOptions.actions.push({
       type: 'icon',
-      // onClick: () => window.print(),
-      onClick: () => onSetPrintView({
-        printType: PRINT_TYPES.LIST,
-        printContentOptions: { pages: true },
-        printOrientation: 'portrait',
-        printSize: 'A4',
-      }),
+      onClick: () => mySetPrintView(),
       title: 'Print',
       icon: 'print',
     });

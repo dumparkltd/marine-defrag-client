@@ -163,20 +163,20 @@ export function ActorView({
         ]}
       />
       <Content isSingle isPrint={isPrintView}>
-        { !dataReady
+        {!dataReady
           && <Loading />
         }
-        { !viewEntity && dataReady
+        {!viewEntity && dataReady
           && (
             <div>
               <FormattedMessage {...messages.notFound} />
             </div>
           )
         }
-        { viewEntity && dataReady && (
+        {viewEntity && dataReady && (
           <ViewWrapper isPrint={isPrintView}>
             {isPrintView && (
-              <HeaderPrint />
+              <HeaderPrint argsKeep={['am', 'tm', 'subj', 'actiontype']} />
             )}
             <ViewHeader
               isPrintView={isPrintView}
@@ -227,9 +227,9 @@ export function ActorView({
                     group={{
                       fields: [
                         checkActorAttribute(typeId, 'description')
-                          && getMarkdownField(viewEntity, 'description', true),
+                        && getMarkdownField(viewEntity, 'description', true),
                         checkActorAttribute(typeId, 'activity_summary')
-                          && getMarkdownField(viewEntity, 'activity_summary', true),
+                        && getMarkdownField(viewEntity, 'activity_summary', true),
                       ],
                     }}
                   />
@@ -262,25 +262,25 @@ export function ActorView({
                         group={{
                           fields: [
                             checkActorAttribute(typeId, 'url')
-                              && getLinkField(viewEntity),
+                            && getLinkField(viewEntity),
                             checkActorAttribute(typeId, 'gdp')
-                              && getNumberField(
-                                viewEntity,
-                                'gdp',
-                                {
-                                  unit: 'US$',
-                                  unitBefore: true,
-                                  info: appMessages.attributeInfo.gdp && intl.formatMessage(appMessages.attributeInfo.gdp),
-                                },
-                              ),
+                            && getNumberField(
+                              viewEntity,
+                              'gdp',
+                              {
+                                unit: 'US$',
+                                unitBefore: true,
+                                info: appMessages.attributeInfo.gdp && intl.formatMessage(appMessages.attributeInfo.gdp),
+                              },
+                            ),
                             checkActorAttribute(typeId, 'population')
-                              && getNumberField(
-                                viewEntity,
-                                'population',
-                                {
-                                  info: appMessages.attributeInfo.population && intl.formatMessage(appMessages.attributeInfo.population),
-                                },
-                              ),
+                            && getNumberField(
+                              viewEntity,
+                              'population',
+                              {
+                                info: appMessages.attributeInfo.population && intl.formatMessage(appMessages.attributeInfo.population),
+                              },
+                            ),
                           ],
                         }}
                       />
