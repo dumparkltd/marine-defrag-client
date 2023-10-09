@@ -16,14 +16,11 @@ import {
   Layer,
   Text,
 } from 'grommet';
-import { CircleInformation, FormClose } from 'grommet-icons';
-
-import PrintHide from 'components/styled/PrintHide';
-
-const DropContent = styled((p) => (
+import { CircleInformation, CircleQuestion, FormClose } from 'grommet-icons';
+const DropContent = styled(({ dropBackground, ...p }) => (
   <Box
-    pad="small"
-    background="light-1"
+    pad="xxsmall"
+    background={dropBackground}
     {...p}
   />
 ))`
@@ -70,45 +67,67 @@ const Markdown = styled(ReactMarkdown)`
 `;
 
 function InfoOverlay({
-  dark, content, tooltip, title, padButton, colorButton, inline,
+  dark,
+  content,
+  tooltip,
+  title,
+  padButton = null,
+  colorButton,
+  icon,
+  markdown,
+  inline,
+  dropBackground,
 }) {
   const infoRef = useRef(null);
   const [info, showInfo] = useState(false);
   return (
-    <PrintHide>
+    <>
       <Box
         as={inline ? 'span' : 'div'}
         fill={false}
-        pad={inline ? null : (padButton || { horizontal: 'small' })}
+        pad={padButton || (inline ? null : { horizontal: 'small' })}
         ref={infoRef}
         flex={inline ? false : { grow: 0, shrink: 0 }}
         style={inline ? { width: 'auto', display: 'inline-block' } : null}
       >
         <Button
           plain
+          icon={
+            (tooltip || icon === 'question')
+              ? (
+                <CircleQuestion
+                  color={colorButton || (dark ? 'light-5' : 'dark-5')}
+                  size="21px"
+                />
+              )
+              : (
+                <CircleInformation
+                  color={colorButton || (dark ? 'light-5' : 'dark-5')}
+                  size="21px"
+                />
+              )
+          }
           fill={false}
           onMouseOver={() => tooltip && showInfo(true)}
           onMouseLeave={() => tooltip && showInfo(false)}
           onFocus={() => tooltip && showInfo(true)}
           onBlur={() => null}
           onClick={() => !tooltip && showInfo(!info)}
-          style={{ width: '25px' }}
-        >
-          <CircleInformation
-            color={colorButton || (dark ? 'light-5' : 'dark-5')}
-            size="21px"
-          />
-        </Button>
+        />
       </Box>
       {info && infoRef && tooltip && (
         <Drop
           align={{ bottom: 'top' }}
           target={infoRef.current}
+          plain
         >
-          <DropContent>
-            <div>
-              <Markdown source={content} className="react-markdown" linkTarget="_blank" />
-            </div>
+          <DropContent dropBackground={dropBackground}>
+            {markdown && (
+              <div>
+                <Markdown source={content} className="react-markdown" linkTarget="_blank" />
+              </div>
+            )}
+            {!markdown && content}
           </DropContent>
         </Drop>
       )}
@@ -133,22 +152,31 @@ function InfoOverlay({
             </LayerHeader>
             <LayerContent flex={{ grow: 1 }}>
               <div>
-                <Markdown source={content} className="react-markdown" linkTarget="_blank" />
+                {markdown && (
+                  <Markdown source={content} className="react-markdown" linkTarget="_blank" />
+                )}
+                {!markdown && content}
               </div>
             </LayerContent>
           </LayerWrap>
         </Layer>
       )}
-    </PrintHide>
+    </>
   );
 }
 
 InfoOverlay.propTypes = {
   dark: PropTypes.bool,
-  tooltip: PropTypes.bool,
+  markdown: PropTypes.bool,
   inline: PropTypes.bool,
-  content: PropTypes.string,
+  tooltip: PropTypes.bool,
+  content: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+  ]),
   title: PropTypes.string,
+  icon: PropTypes.string,
+  dropBackground: PropTypes.string,
   colorButton: PropTypes.string,
   padButton: PropTypes.oneOfType([
     PropTypes.object,

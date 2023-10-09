@@ -72,6 +72,7 @@ function EntityListSidebarOption({
           title={label}
           content={option.get('info')}
           dark={option.get('active')}
+          markdown
         />
       )}
     </Styled>

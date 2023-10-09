@@ -163,6 +163,7 @@ function Option({
         <InfoOverlay
           title={optionLabel}
           content={optionInfo}
+          markdown
         />
       )}
     </Styled>

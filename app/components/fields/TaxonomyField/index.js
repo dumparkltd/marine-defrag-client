@@ -34,6 +34,7 @@ function TaxonomyField({ field, intl }) {
             content={intl.formatMessage(field.info)}
             padButton="none"
             colorButton="dark-5"
+            markdown
           />
         )}
       </ListLabelWrap>
