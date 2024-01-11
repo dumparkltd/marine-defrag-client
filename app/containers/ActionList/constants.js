@@ -33,6 +33,7 @@ export const CONFIG = {
   serverPath: API.ACTIONS,
   clientPath: ROUTES.ACTION,
   hasMemberOption: true,
+  downloadCSV: true,
   views: {
     list: {
       search: ['code', 'title', 'description'],
@@ -61,18 +62,7 @@ export const CONFIG = {
     ownKey: 'measure_id',
     // defaultGroupAttribute: 'groups_actions_default',
   },
-  // connectedTaxonomies: { // filter by each category
-  //   query: 'catx',
-  //   search: true,
-  //   exclude: 'tags_actions',
-  //   connections: [
-  //     {
-  //       path: API.ACTORS, // filter by actor connection
-  //       message: 'entities.actors.plural',
-  //       key: 'actor_id',
-  //     },
-  //   ],
-  // },
+
   connections: { // filter by associated entity
     // filter by associated actor
     actors: {

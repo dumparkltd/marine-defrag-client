@@ -29,6 +29,7 @@ export const CONFIG = {
   types: 'actortypes',
   serverPath: API.ACTORS,
   clientPath: ROUTES.ACTOR,
+  downloadCSV: true,
   views: {
     list: {
       search: ['code', 'title', 'description'],

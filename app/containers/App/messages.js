@@ -959,6 +959,42 @@ export default defineMessages({
       id: 'app.containers.App.attributes.parent_id',
       defaultMessage: 'Parent/predecessor',
     },
+    private: {
+      id: 'app.containers.App.attributes.private',
+      defaultMessage: 'Private',
+    },
+    is_archive: {
+      id: 'app.containers.App.attributes.is_archive',
+      defaultMessage: 'Is archived',
+    },
+    updated_by_id: {
+      id: 'app.containers.App.attributes.updated_by_id',
+      defaultMessage: 'Updated by',
+    },
+    created_by_id: {
+      id: 'app.containers.App.attributes.created_by_id',
+      defaultMessage: 'Created by',
+    },
+    relationship_updated_by_id: {
+      id: 'app.containers.App.attributes.relationship_updated_by_id',
+      defaultMessage: 'Connections updated by',
+    },
+    relationship_updated_at: {
+      id: 'app.containers.App.attributes.relationship_updated_at',
+      defaultMessage: 'Connections last updated at',
+    },
+    notifications: {
+      id: 'app.containers.App.attributes.notifications',
+      defaultMessage: 'Notifications',
+    },
+    created_at: {
+      id: 'app.containers.App.attributes.created_at',
+      defaultMessage: 'Created At',
+    },
+    updated_at: {
+      id: 'app.containers.App.attributes.updated_at',
+      defaultMessage: 'Updated At',
+    },
     manager_id: {
       categories: {
         id: 'app.containers.App.attributes.manager_id.categories',

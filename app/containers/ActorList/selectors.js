@@ -21,6 +21,7 @@ import {
   selectActionTaxonomies,
   selectMemberQuery,
   selectAssociationQuery,
+  selectUsers,
 } from 'containers/App/selectors';
 
 import {
@@ -45,6 +46,7 @@ export const selectConnections = createSelector(
   selectActionCategoriesGroupedByAction,
   selectActorCategoriesGroupedByActor,
   selectCategories,
+  selectUsers,
   (
     ready,
     actions,
@@ -52,6 +54,7 @@ export const selectConnections = createSelector(
     actionAssociationsGrouped,
     actorAssociationsGrouped,
     categories,
+    users,
   ) => {
     if (ready) {
       return new Map().set(
@@ -68,6 +71,9 @@ export const selectConnections = createSelector(
           actorAssociationsGrouped,
           categories,
         )
+      ).set(
+        API.USERS,
+        users,
       );
     }
     return new Map();

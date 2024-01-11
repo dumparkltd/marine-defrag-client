@@ -544,6 +544,10 @@ export const selectResource = createSelector(
   (state, id) => selectEntity(state, { id, path: API.RESOURCES }),
   (entity) => entity
 );
+export const selectUsers = createSelector(
+  (state) => selectEntities(state, API.USERS),
+  (entities) => sortEntities(entities, 'asc', 'name', null, false)
+);
 // all action types
 export const selectActortypes = createSelector(
   (state) => selectEntities(state, API.ACTORTYPES),

@@ -17,6 +17,7 @@ import {
   ACTIONTYPE_TARGETTYPES,
   ACTIONTYPES_CONFIG,
   ACTORTYPES_CONFIG,
+  USER_ACTIONTYPES,
   FF_ACTIONTYPE,
   ACTIONTYPES,
 } from 'themes/config';
@@ -105,11 +106,11 @@ class EntitiesListView extends React.Component { // eslint-disable-line react/pr
       this.ScrollReference.current,
       this.ScrollContainer.current
     );
-  }
+  };
 
   setType = (type) => {
     this.setState({ viewType: type });
-  }
+  };
 
   render() {
     const {
@@ -147,11 +148,13 @@ class EntitiesListView extends React.Component { // eslint-disable-line react/pr
       allEntityCount,
       headerOptions,
       isPrintView,
+      isAdmin,
     } = this.props;
     const { viewType } = this.state;
 
     let type;
     let hasByTarget;
+    let hasByUser;
     let isTarget;
     let isActive;
     let subjectOptions;
@@ -167,7 +170,11 @@ class EntitiesListView extends React.Component { // eslint-disable-line react/pr
       columns = ACTIONTYPES_CONFIG[typeId] && ACTIONTYPES_CONFIG[typeId].columns;
       type = actiontypes.find((at) => qe(at.get('id'), typeId));
       hasByTarget = type.getIn(['attributes', 'has_target']);
+      hasByUser = isAdmin && USER_ACTIONTYPES && USER_ACTIONTYPES.indexOf(typeId) > -1;
       if (!hasByTarget && mapSubject === 'targets') {
+        mapSubjectClean = null;
+      }
+      if (!hasByUser && mapSubject === 'users') {
         mapSubjectClean = null;
       }
       if (qe(ACTIONTYPES.INTL, typeId)) {
@@ -196,16 +203,18 @@ class EntitiesListView extends React.Component { // eslint-disable-line react/pr
             },
           ];
         }
-        subjectOptions = [
-          ...subjectOptions,
-          {
-            type: 'secondary',
-            title: qe(ACTIONTYPES.DONOR, typeId) ? 'By donor' : 'By actor',
-            onClick: () => onSetMapSubject('actors'),
-            active: mapSubjectClean === 'actors',
-            disabled: mapSubjectClean === 'actors',
-          },
-        ];
+        if (hasByUser) {
+          subjectOptions = [
+            ...subjectOptions,
+            {
+              type: 'secondary',
+              title: 'By user',
+              onClick: () => onSetMapSubject('users'),
+              active: mapSubjectClean === 'users',
+              disabled: mapSubjectClean === 'users',
+            },
+          ];
+        }
       }
       if (mapSubjectClean === 'targets' && qe(viewType, ACTORTYPES.COUNTRY)) {
         memberOption = {
@@ -593,6 +602,7 @@ EntitiesListView.propTypes = {
   includeActorMembers: PropTypes.bool,
   includeTargetMembers: PropTypes.bool,
   listUpdating: PropTypes.bool,
+  isAdmin: PropTypes.bool,
   entities: PropTypes.instanceOf(List),
   taxonomies: PropTypes.instanceOf(Map),
   actortypes: PropTypes.instanceOf(Map),

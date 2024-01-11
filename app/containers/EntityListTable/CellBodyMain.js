@@ -14,6 +14,9 @@ const Select = styled(PrintHide)`
   padding-right: 6px;
 `;
 
+const StyledInput = styled.input`
+  accent-color: ${({ theme }) => theme.global.colors.highlight};
+`;
 export function CellBodyMain({
   entity,
   // column,
@@ -24,7 +27,7 @@ export function CellBodyMain({
       {canEdit && (
         <PrintHide>
           <Select>
-            <input
+            <StyledInput
               type="checkbox"
               checked={entity.selected}
               onChange={(evt) => entity.onSelect(evt.target.checked)}

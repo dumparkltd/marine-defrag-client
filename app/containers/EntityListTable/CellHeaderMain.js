@@ -18,7 +18,6 @@ const Select = styled(PrintHide)`
   text-align: center;
   padding-right: 6px;
   position: relative;
-  top: -1px
 `;
 
 const SortButton = styled(ButtonFlatIconOnly)`
