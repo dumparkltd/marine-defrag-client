@@ -11,6 +11,7 @@ import {
   SUBMIT_INVALID,
   SAVE_ERROR_DISMISS,
   LOGOUT_SUCCESS,
+  RESET_ENTITY_FORM,
 } from 'containers/App/constants';
 
 import { checkResponseError } from 'utils/request';
@@ -27,6 +28,7 @@ const initialState = fromJS({
 
 export const entityFormReducer = (state = initialState, action) => {
   switch (action.type) {
+    case RESET_ENTITY_FORM:
     case LOGOUT_SUCCESS:
     case LOCATION_CHANGE:
       return initialState;

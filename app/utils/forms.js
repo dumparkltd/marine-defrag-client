@@ -14,7 +14,8 @@ import validateDateFormat from 'components/forms/validators/validate-date-format
 import validateRequired from 'components/forms/validators/validate-required';
 import validateNumber from 'components/forms/validators/validate-number';
 import validateEmailFormat from 'components/forms/validators/validate-email-format';
-import validateLength from 'components/forms/validators/validate-length';
+import validateMinLength from 'components/forms/validators/validate-min-length';
+import validateMaxLength from 'components/forms/validators/validate-max-length';
 
 import {
   PUBLISH_STATUSES,
@@ -750,10 +751,12 @@ export const getMarkdownFormField = (formatMessage, required, attribute = 'descr
 });
 
 // unused
-export const getTextareaField = (formatMessage, attribute = 'description') => getFormField({
+export const getTextareaField = (formatMessage, attribute = 'description', required, type, maxLength = 2000) => getFormField({
   formatMessage,
-  controlType: 'textarea',
+  controlType: type || 'textarea',
   attribute,
+  required,
+  maxLength,
 });
 
 export const getDateField = (formatMessage, attribute, required = false, label, onChange) => {
@@ -822,7 +825,7 @@ export const getPasswordField = (formatMessage, model = '.attributes.password') 
     required: true,
     model,
   });
-  field.validators.passwordLength = (val) => validateLength(val, 6);
+  field.validators.passwordLength = (val) => validateMinLength(val, 6);
   field.errorMessages.passwordLength = formatMessage(appMessages.forms.passwordShortError);
   return field;
 };
@@ -851,6 +854,8 @@ export const getPasswordNewField = (formatMessage, model = '.attributes.password
     required: true,
     model,
   });
+  field.validators.passwordLength = (val) => validateMinLength(val, 6);
+  field.errorMessages.passwordLength = formatMessage(appMessages.forms.passwordShortError);
   // field.validators.email = validateEmailFormat;
   // field.errorMessages.email = formatMessage(appMessages.forms.emailFormatError);
   return field;
@@ -865,6 +870,8 @@ export const getPasswordConfirmationField = (formatMessage, model = '.attributes
     required: true,
     model,
   });
+  field.validators.passwordLength = (val) => validateMinLength(val, 6);
+  field.errorMessages.passwordLength = formatMessage(appMessages.forms.passwordShortError);
   // field.validators.email = validateEmailFormat;
   // field.errorMessages.email = formatMessage(appMessages.forms.emailFormatError);
   return field;
@@ -881,6 +888,7 @@ export const getFormField = ({
   onChange,
   type,
   model,
+  maxLength = 6000,
 }) => {
   const field = {
     id: attribute,
@@ -893,6 +901,8 @@ export const getFormField = ({
     errorMessages: {},
     hint,
   };
+  field.validators.maxFieldLength = (val) => validateMaxLength(val, maxLength);
+  field.errorMessages.maxFieldLength = formatMessage(appMessages.forms.fieldMaxLengthError, { maxLength });
   if (onChange) {
     field.changeAction = onChange;
   }

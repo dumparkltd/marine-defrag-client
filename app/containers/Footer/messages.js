@@ -24,6 +24,10 @@ export default defineMessages({
       defaultMessage: 'contact@project.url',
     },
   },
+  contactUs: {
+    id: 'app.containers.Footer.contactUs',
+    defaultMessage: 'Contact us',
+  },
   contact2: {
     email: {
       id: 'app.containers.Footer.contact2.email',

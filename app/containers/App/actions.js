@@ -55,6 +55,7 @@ import {
   UPDATE_PATH,
   AUTHENTICATE_FORWARD,
   UPDATE_ENTITY_FORM,
+  RESET_ENTITY_FORM,
   CLOSE_ENTITY,
   OPEN_NEW_ENTITY_MODAL,
   RESET_PROGRESS,
@@ -436,6 +437,12 @@ export function updateEntityForm(data) {
   return {
     type: UPDATE_ENTITY_FORM,
     data,
+  };
+}
+
+export function resetEntityForm() {
+  return {
+    type: RESET_ENTITY_FORM,
   };
 }
 

@@ -6,7 +6,9 @@ import Content from 'components/Content';
 
 const Wrapper = styled((p) => <Box {...p} />)`
     max-width: 90%;
+    min-height: 70vH;
     @media (min-width: ${(props) => props.theme.breakpoints.medium}) {
+      width: 100%;
       max-width: 400px;
     }
     @media (min-width: ${(props) => props.theme.breakpoints.large}) {

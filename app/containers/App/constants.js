@@ -61,6 +61,7 @@ export const UPDATE_PATH = 'impactoss/App/UPDATE_PATH';
 
 export const SAVE_ENTITY_FORM = 'impactoss/App/SAVE_ENTITY_FORM';
 export const UPDATE_ENTITY_FORM = 'impactoss/App/UPDATE_ENTITY_FORM';
+export const RESET_ENTITY_FORM = 'impactoss/App/RESET_ENTITY_FORM';
 
 export const CLOSE_ENTITY = 'impactoss/App/CLOSE_ENTITY';
 

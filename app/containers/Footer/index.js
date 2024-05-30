@@ -179,34 +179,41 @@ function Footer({
             </BoxPrint>
           </Box>
           <Box gap={isMobile ? 'medium' : 'xsmall'}>
-            {pages && (
+            <Box
+              direction={isMobile ? 'column' : 'row'}
+              justify={isMobile ? 'start' : 'between'}
+              align="start"
+              gap={isMobile ? 'small' : 'none'}
+              pad={{ horizontal: 'medium' }}
+            >
               <Box
                 direction={isMobile ? 'column' : 'row'}
-                justify={isMobile ? 'start' : 'between'}
-                align="start"
-                gap={isMobile ? 'small' : 'none'}
-                pad={{ horizontal: 'medium' }}
+                gap="hair"
+                align={isMobile ? 'start' : 'end'}
               >
-                <Box
-                  direction={isMobile ? 'column' : 'row'}
-                  gap="small"
-                  align={isMobile ? 'start' : 'end'}
+                <FooterLinkPage
+                  href={ROUTES.FEEDBACK}
+                  onClick={(evt) => {
+                    if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+                    onPageLink(ROUTES.FEEDBACK);
+                  }}
                 >
-                  {footerPages && footerPages.size > 0 && footerPages.toList().map((page) => (
-                    <FooterLinkPage
-                      key={page.get('id')}
-                      onClick={(evt) => {
-                        if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-                        onPageLink(`${ROUTES.PAGES}/${page.get('id')}`);
-                      }}
-                      href={`${ROUTES.PAGES}/${page.get('id')}`}
-                    >
-                      {page.getIn(['attributes', 'menu_title']) || page.getIn(['attributes', 'title'])}
-                    </FooterLinkPage>
-                  ))}
-                </Box>
+                  <FormattedMessage {...messages.contactUs} />
+                </FooterLinkPage>
+                {footerPages && footerPages.size > 0 && footerPages.toList().map((page) => (
+                  <FooterLinkPage
+                    key={page.get('id')}
+                    onClick={(evt) => {
+                      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+                      onPageLink(`${ROUTES.PAGES}/${page.get('id')}`);
+                    }}
+                    href={`${ROUTES.PAGES}/${page.get('id')}`}
+                  >
+                    {page.getIn(['attributes', 'menu_title']) || page.getIn(['attributes', 'title'])}
+                  </FooterLinkPage>
+                ))}
               </Box>
-            )}
+            </Box>
           </Box>
         </Container>
       </FooterContent>

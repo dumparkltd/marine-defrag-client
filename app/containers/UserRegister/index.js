@@ -24,6 +24,7 @@ import Messages from 'components/Messages';
 import Loading from 'components/Loading';
 import ContentNarrow from 'components/ContentNarrow';
 import ContentHeader from 'containers/ContentHeader';
+import Footer from 'containers/Footer';
 import AuthForm from 'components/forms/AuthForm';
 import A from 'components/styled/A';
 
@@ -123,6 +124,7 @@ export class UserRegister extends React.PureComponent { // eslint-disable-line r
             </p>
           </BottomLinks>
         </ContentNarrow>
+        <Footer />
       </div>
     );
   }

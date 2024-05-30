@@ -681,6 +681,27 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: ROUTES.FEEDBACK,
+      name: 'feedbackNew',
+      onEnter: redirectIfNotPermitted(USER_ROLES.ANALYST.value),
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/FeedbackNew/reducer'),
+          import('containers/FeedbackNew/sagas'),
+          import('containers/FeedbackNew'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('feedbackNew', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: `${ROUTES.PAGES}${ROUTES.ID}`,
       onEnter: redirectIfNotPermitted(USER_ROLES.ANALYST.value),
       name: 'pageView',

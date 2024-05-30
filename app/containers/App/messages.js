@@ -635,6 +635,10 @@ export default defineMessages({
       id: 'app.containers.App.forms.referenceRequiredError',
       defaultMessage: '"Reference" is required. ',
     },
+    fieldMaxLengthError: {
+      id: 'app.containers.App.forms.fieldMaxLengthError',
+      defaultMessage: 'Content exceeds the maximum allowed length of {maxLength} characters.',
+    },
   },
   hints: {
     autoReference: {
@@ -733,6 +737,10 @@ export default defineMessages({
       id: 'app.containers.App.placeholders.title',
       defaultMessage: 'Enter title',
     },
+    subject: {
+      id: 'app.containers.App.placeholders.subject',
+      defaultMessage: 'Subject',
+    },
     name: {
       id: 'app.containers.App.placeholders.name',
       defaultMessage: 'Full name',
@@ -788,6 +796,10 @@ export default defineMessages({
     content: {
       id: 'app.containers.App.placeholders.content',
       defaultMessage: 'Enter content',
+    },
+    message_content: {
+      id: 'app.containers.App.placeholders.message_content',
+      defaultMessage: 'Enter message content',
     },
     date_comment: {
       id: 'app.containers.App.placeholders.target_date_comment',
@@ -847,6 +859,10 @@ export default defineMessages({
       id: 'app.containers.App.attributes.title',
       defaultMessage: 'Title',
     },
+    subject: {
+      id: 'app.containers.App.attributes.subject',
+      defaultMessage: 'Message subject',
+    },
     description: {
       id: 'app.containers.App.attributes.description',
       defaultMessage: 'Description',
@@ -858,6 +874,10 @@ export default defineMessages({
     content: {
       id: 'app.containers.App.attributes.content',
       defaultMessage: 'Comment',
+    },
+    message_content: {
+      id: 'app.containers.App.attributes.message_content',
+      defaultMessage: 'Content',
     },
     url: {
       id: 'app.containers.App.attributes.url',

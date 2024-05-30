@@ -46,6 +46,7 @@ import ControlShort from 'components/forms/ControlShort';
 import ControlInput from 'components/forms/ControlInput';
 import ControlCheckbox from 'components/forms/ControlCheckbox';
 import ControlTextArea from 'components/forms/ControlTextArea';
+import ControlTextAreaLarge from 'components/forms/ControlTextAreaLarge';
 import ControlSelect from 'components/forms/ControlSelect';
 import MarkdownControl from 'components/forms/MarkdownControl';
 import DateControl from 'components/forms/DateControl';
@@ -106,6 +107,7 @@ const controls = {
   titleText: ControlTitleText,
   short: ControlShort,
   textarea: ControlTextArea,
+  textareaLarge: ControlTextAreaLarge,
   markdown: MarkdownControl,
   date: DateControl,
   select: ControlSelect,
@@ -359,6 +361,7 @@ class EntityForm extends React.Component { // eslint-disable-line react/prefer-s
       validators,
       newEntityModal,
       scrollContainer,
+      labels,
     } = this.props;
     const hasEntityNewModal = !!newEntityModal;
     return (
@@ -438,11 +441,16 @@ class EntityForm extends React.Component { // eslint-disable-line react/prefer-s
             {!this.state.deleteConfirmed
               && (
                 <FormFooterButtons>
-                  <ButtonCancel type="button" onClick={handleCancel}>
-                    <FormattedMessage {...appMessages.buttons.cancel} />
-                  </ButtonCancel>
+                  {handleCancel && (
+                    <ButtonCancel type="button" onClick={handleCancel}>
+                      <FormattedMessage {...appMessages.buttons.cancel} />
+                    </ButtonCancel>
+                  )}
                   <ButtonSubmit type="submit" disabled={this.props.saving}>
-                    <FormattedMessage {...appMessages.buttons.save} />
+                    {labels && labels.submit}
+                    {(!labels || !labels.submit) && (
+                      <FormattedMessage {...appMessages.buttons.save} />
+                    )}
                   </ButtonSubmit>
                 </FormFooterButtons>
               )
@@ -462,7 +470,7 @@ const mapStateToProps = (state) => ({
 EntityForm.propTypes = {
   handleSubmitFail: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  handleCancel: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func,
   handleDelete: PropTypes.func,
   handleUpdate: PropTypes.func,
   model: PropTypes.string,
@@ -473,6 +481,7 @@ EntityForm.propTypes = {
   newEntityModal: PropTypes.object,
   validators: PropTypes.object,
   scrollContainer: PropTypes.object,
+  labels: PropTypes.object,
 };
 EntityForm.defaultProps = {
   saving: false,

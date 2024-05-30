@@ -65,6 +65,7 @@ export const ROUTES = {
   CATEGORY: '/category',
   PAGES: '/pages',
   SEARCH: '/search',
+  FEEDBACK: '/contact',
 };
 
 // Server endpoints for database tables **************************
@@ -92,6 +93,7 @@ export const API = {
   ROLES: 'roles',
   PAGES: 'pages',
   BOOKMARKS: 'bookmarks',
+  FEEDBACKS: 'feedbacks',
 };
 
 export const ACTIONTYPES = {

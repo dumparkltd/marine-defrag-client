@@ -60,7 +60,8 @@ const Main = styled.div`
   left: 0;
   right: 0;
   bottom:0;
-  overflow: ${({ isPrint }) => isPrint ? 'auto' : 'hidden'};
+  overflow-x: ${({ isPrint }) => isPrint ? 'auto' : 'hidden'};
+  overflow-y: auto;
   width: auto;
   overflow-y: auto;
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
